@@ -39,7 +39,7 @@ class Person {
   }
   function getInfo() {
   return "
-  <h2>A few words about myself.</h2><br>" . "My name is " . $this->getName() . "." . 
+  <h2>A few words about my family and me.</h2><br>" . "My name is " . $this->getName() . "." . 
   "<p> My mother is " . $this->getMother()->getName() . "." . 
   "<br> My grandmother on my mother's side is " . $this->getMother()->getMother()->getName() . "." . 
   "<br> My grandfather on my mother's side is " . $this->getMother()->getFather()->getName() . "." . 
