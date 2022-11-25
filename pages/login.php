@@ -4,11 +4,11 @@
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
-					<h1>Login / Register</h1>
+					<h1>Авторизация</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Домой</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Login/Register</li>
+              <li class="breadcrumb-item"><a href="/">Главная</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Авторизация</li>
             </ol>
           </nav>
 				</div>
@@ -24,31 +24,32 @@
 				<div class="col-lg-6">
 					<div class="login_box_img">
 						<div class="hover">
-							<h4>New to our website?</h4>
-							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
-							<a class="button button-account" href="register.html">Create an Account</a>
+							<h4>Впервые на нашем сайте?</h4>
+							<p>Каждый день появляется все больше научных или технологичных фич, и одна из них это...</p>
+							<a class="button button-account" href="register">Регистрация</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<div class="login_form_inner">
-						<h3>Log in to enter</h3>
-						<form class="row login_form" action="#/" id="contactForm" >
+					<div class="login_form_inner register_form_inner">
+						<h3>Авторизоваться</h3>
+						<form class="row login_form" onsubmit="sendData(this); return false;">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+								<input type="email" class="form-control" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required>
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+								<input type="password" class="form-control" name="pass" placeholder="Пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пароль'" required>
+							</div>
+							<p id="info" style="color: red; padding-left: 1.5rem"></p>
+							<div class="col-md-12 form-group">
+							 <!-- <div class="creat_account">
+									<input type="checkbox" name="selector" required>
+									<label for="f-option2">Запомнить меня</label>
+								</div> -->
 							</div>
 							<div class="col-md-12 form-group">
-								<div class="creat_account">
-									<input type="checkbox" id="f-option2" name="selector">
-									<label for="f-option2">Keep me logged in</label>
-								</div>
-							</div>
-							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="button button-login w-100">Вход</button>
-								<a href="#">Forgot Password?</a>
+								<button type="submit" class="button button-login w-100">Вход</button>
+								<a href="#">Забыл пароль?</a>
 							</div>
 						</form>
 					</div>
@@ -57,6 +58,18 @@
 		</div>
 	</section>
 	<!--================End Login Box Area =================-->
-
-
-
+<script>
+      async function sendData(form) {
+			info.innerText = "";
+        let response = await fetch("authUser", {
+          method: "POST",
+          body: new FormData(form),
+        });
+        let res = await response.json();
+        if (res.result == "ok") {
+          location.href = "users/profile";
+        } else if (res.result = "not_found") {
+          info.innerText = "Такой пользователь не существует!";
+        }
+      }
+    </script>
