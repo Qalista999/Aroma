@@ -47,7 +47,24 @@ return json_encode(["result" => "success"]);
 //Статический метод авторизации пользователя
 static function authUser($email, $pass) {
 global $mysqli;
-return "Авторизация пользователя";
 
+$email = trim(mb_strtolower($_POST["email"]));
+$pass = trim($_POST["pass"]);
+
+$result = $mysqli->query("SELECT * FROM `users2` WHERE `email`='$email'");
+// var_dump($result["email"]);
+$result = $result->fetch_assoc();
+
+if (password_verify($pass, $result["pass"])) {
+return json_encode(["result" => "ok"]);
+
+$_SESSION["name"] = $result["name"];
+$_SESSION["lastname"] = $result["lastname"];
+$_SESSION["email"] = $result["email"];
+$_SESSION["id"] = $result["id"];
+
+} else {
+return json_encode(["result" => "not_found"]);
+}
 }
 }
