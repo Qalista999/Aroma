@@ -69,7 +69,7 @@
         if (res.result == "ok") {
           location.href = "users/profile";
         } else if (res.result = "not_found") {
-          info.innerText = "Такой пользователь не существует!";
+          info.innerText = "Такого пользователя не существует!";
         }
       }
     </script>
